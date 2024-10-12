@@ -219,7 +219,7 @@ export class Trove {
 		if (track.cleanup === FN_MARKER) {
 			(track.obj as () => void)();
 		} else if (track.cleanup === THREAD_MARKER) {
-			task.cancel(track.obj as thread);
+			pcall(task.cancel, track.obj as thread)
 		} else {
 			(track.obj as Record<string, (self: unknown) => void>)[track.cleanup](track.obj);
 		}
